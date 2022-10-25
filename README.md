@@ -1,2 +1,1 @@
 # specs.scientific-python.org
-
