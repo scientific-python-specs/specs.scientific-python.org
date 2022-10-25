@@ -74,7 +74,7 @@ params:
         title: ""
         links:
           - text: About
-            link: /about/
+            link: /purpose-and-process/
           - text: Roadmap
             link: /roadmap/
           - text: Code of Conduct
