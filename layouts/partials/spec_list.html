@@ -1,0 +1,53 @@
+<section class="content-padding flex-row">
+    <div class="shortcuts-container">
+        <div class="shortcuts-title">
+            <img src="/images/icons/list-bulleted.svg"/>
+            On this page
+        </div>
+        <div id="shortcuts"></div>
+    </div>
+    <div class="content-container">
+        <div class="columns">
+            <div class="column is-centered-tablet-portrait">
+                <h1 class="title section-title">{{ .Title }}</h1>
+                <h5 class="subtitle is-5 is-muted">{{ .Params.Subtitle }}</h5>
+                <div class="divider"></div>
+            </div>
+        </div>
+       {{.Content}}
+        <table class="spec__table">
+          <thead>
+            <tr>
+              <td>Title</td><td>Endorsed By</td>
+            </tr>
+          </thead>
+          {{- range $.Paginator.Pages.ByTitle }}
+            {{- if and (hasPrefix .Title "SPEC") (in .Title "—") }}
+              <tr class="spec">
+                <td class="spec__title">
+                  <a href="{{ .RelPermalink }}">
+                    {{- .Title }}
+                  </a>
+                </td>
+                <td class="spec__status">
+                  {{- $endorsed_by := .Params.Get "endorsed-by" }}
+                  {{- $N := len (or $endorsed_by "") }}
+                  {{- if ge $N 2 }}
+                    {{- range $idx, $el := $endorsed_by  }}
+                      {{ $project_page := $.GetPage (printf "core-projects/%s" $el) }}
+                      {{ $url := $project_page.RelPermalink }}
+                      <a href="{{ $url }}">
+                        <img title="{{ $project_page.Title }}" src="{{ $project_page.Params.avatar }}" class="endorse-icon"/>
+                      </a>
+                    {{ end }}
+                  {{ else }}
+                    DRAFT
+                  {{ end -}}
+                </td>
+              </tr>
+            {{ end }}
+          {{- end }}
+        </table>
+    </div>
+  </div>
+</section>
