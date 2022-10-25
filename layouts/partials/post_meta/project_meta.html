@@ -1,0 +1,31 @@
+{{- $root := . -}}
+<div class="spec-meta">
+  <table>
+    {{ $meta_fields := (slice "homepage" "repository" "pypi" "libraries-io" "license" "license-type") }}
+    {{- range $attr := $meta_fields -}}
+      {{ $val := $.Params.Get $attr }}
+      <tr class="field">
+        <td class="field-name">
+          {{ $attr | humanize }}:
+        </td>
+        <td class="field-value">
+          {{ $val | markdownify }}
+        </td>
+      </tr>
+    {{- end -}}
+  </table>
+</div>
+
+<div class="endorsed-specs">
+  <h1>Endorsed SPECs</h1>
+  {{ $specs := where $.Site.Pages "Section" "specs" }}
+  <ul class="endorsed-specs-list">
+    {{- range $specs -}}
+      {{ if not (in (lower .Title) "meta") }}
+        {{ if in (.Params.Get "endorsed-by") $root.File.BaseFileName }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end }}
+      {{- end }}
+    {{- end -}}
+  </ul>
+</div>
