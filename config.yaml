@@ -75,8 +75,8 @@ params:
         links:
           - text: About
             link: /purpose-and-process/
-          - text: Roadmap
-            link: /roadmap/
+          # - text: Roadmap
+          #   link: /roadmap/
           - text: Code of Conduct
             link: https://scientific-python.org/code_of_conduct/
       column2:
@@ -90,5 +90,5 @@ params:
             link: https://scientific-python.org/summits/
       column3:
         links:
-          - text: Press kit
-            link: /press-kit
+          # - text: Press kit
+          #   link: /press-kit
